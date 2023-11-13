@@ -1,0 +1,33 @@
+<div class="flex-col box-content border-l border-b ">
+
+  <div class="flex justify-between px-4 py-2 box-border border-b ">
+    <div class="flex flex-col justify-center align-middle">
+      <h1 class="font-roboto font-medium font-base">Материалы курса</h1>
+    </div>
+    <i class="bi bi-x-lg hover:cursor-pointer" style="font-size: 25px"></i>
+  </div>
+
+  <div class="flex-col box-content">
+    <div class=" border-b px-4">
+      <input type="text" class="px-4 py-2 my-4 rounded-lg bg-input-grey w-full" placeholder="Поиск по материалам курса"
+        [(ngModel)]="term">
+    </div>
+    <div
+    (click)="setActiveSubsection(item)"
+    class="px-4 flex align-middle border-b py-4 hover:cursor-pointer"
+    [ngClass]="{
+      'bg-secondary-grey': active_subsection.title === item.title
+    }"
+    *ngFor="let item of all_items | searchCourseItems: term; let i = index ">
+      <button 
+        (click)="markSubsection($event, item.id)"
+        [ngClass]="{
+            'bi bi-square hover:cursor-pointer': !item.is_complete,
+            'bi bi-check-square-fill hover:cursor-pointer': item.is_complete
+        }"
+        ></button>
+      <h1 class="font-roboto font-normal text-base ml-4">{{item.title}}</h1>
+    </div>
+  </div>
+  <sidebar-section class="border-b " *ngFor="let section of data; let i = index" [section]="section" />
+</div>

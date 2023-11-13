@@ -1,0 +1,36 @@
+<div class="border rounded-xl mb-8 pb-4 shadow-lg">
+        <h1 class="text-lg mb-6 mx-10 mt-10">{{quiz.question}}</h1>
+        <div
+        class="flex py-4 px-10" *ngFor="let item of quiz.answers; let i = index "
+        (click)="chooseAnswer(item)"
+        [ngClass]="{
+            'hover:cursor-pointer hover:border-l-2 border-opacity-0': choosen_answer === undefined,
+            'border-l-2 border-red-600': item === choosen_answer && item != quiz.right_answer,
+            'border-l-2 border-green-400': item === choosen_answer && item === quiz.right_answer,
+        }"
+        >
+            <i
+            class="self-center text-2xl"
+            [ngClass]="{
+                'bi bi-x-circle-fill text-red-600 ': item === choosen_answer && item != quiz.right_answer,
+                'bi bi-check-circle-fill text-green-400': item === choosen_answer && item === quiz.right_answer,
+                'bi bi-circle': item != choosen_answer,
+            }"></i>
+            <div 
+            class="px-2 pt-[2px]">
+                <p 
+                class="text-lg"
+                >{{item}}</p>
+                <p 
+                [ngClass]="{
+                    'text-red-600': item != quiz.right_answer,
+                    'text-green-400': item === quiz.right_answer,
+                }"
+                class="text-base"
+                *ngIf="item === choosen_answer">
+                    {{ item === quiz.right_answer ? quiz.congratulation : quiz.regretulation }}
+                </p>
+            </div>
+            
+        </div>
+</div>

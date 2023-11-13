@@ -1,0 +1,14 @@
+<div class="flex flex-col mt-10 mb-4">
+    <div class="" *ngFor="let item of active_subsection.content; let i = index ">
+        <ng-container *ngIf="item">
+            <lection-text *ngIf="isCourseContentText(item)" [text]="item.text"></lection-text>
+            <lection-image *ngIf="isCourseContentImage(item)" [image]="item"/>
+            <lection-code-example *ngIf="isCourseContentCodeExample(item)" [code_example]="item"></lection-code-example>
+            <lection-text-example *ngIf="isCourseContentTextExample(item)" [data]="item"></lection-text-example>
+            <lection-video *ngIf="isCourseContentVideo(item)" [video]="item"></lection-video>
+            <lection-quiz *ngIf="isCourseContentQuiz(item)" [quiz]="item"></lection-quiz>
+            <lection-code-executor *ngIf="isCourseContentCodeExecutor(item)" [data]="item"></lection-code-executor>
+        </ng-container>
+    </div>
+
+</div>

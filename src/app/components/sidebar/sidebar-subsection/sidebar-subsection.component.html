@@ -1,0 +1,32 @@
+<div
+class="flex flex-row justify-start px-4 py-2 hover:cursor-pointer"
+[ngClass]="{
+    'bg-secondary-grey': active_subsection == subsection
+}"
+(click)="courseService.setActiveSubsection(subsection)"
+>
+        <button 
+        (click)="markSubsection($event ,subsection.id)"
+        
+        [ngClass]="{
+            'bi bi-square hover:cursor-pointer': !subsection.is_complete,
+            'bi bi-check-square-fill hover:cursor-pointer': subsection.is_complete
+        }"
+        ></button>
+
+        <div class="flex flex-col ml-4">
+            <h1
+            class="font-roboto font-normal text-base "
+            
+            >{{subsection.title}}</h1>
+            <div class="flex flex-row align-middle">
+                <i
+                class="bi bi-tv "
+                style="color: #6A6F73;"
+                ></i>
+                <h1 class="ml-2 text-sm font-light text-hint-grey mt-[1px]">{{subsection.time}}</h1>
+            </div>
+
+        </div>
+
+</div>

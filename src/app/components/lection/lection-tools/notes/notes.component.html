@@ -1,0 +1,11 @@
+<div class="flex flex-col mb-20 w-fit">
+    <div class="flex border py-2 px-4 hover:cursor-pointer" [ngClass]="{'hover:bg-gray-100': is_open}" (click)="is_open = !is_open">
+        <p class="text-base w-[180px]">{{active_filter}}</p>
+        <i class="bi bi-chevron-down ml-4 text-xl "></i>
+    </div>
+    <div *ngIf="is_open" class="flex border py-2 px-4 hover:cursor-pointer" [ngClass]="{'hover:bg-gray-100': is_open}"
+     (click)="active_filter = getOtherFilter(); is_open = false">
+        <p class="text-base w-[180px]">{{ getOtherFilter() }}</p>
+        <i class="bi bi-chevron-down ml-4 text-xl opacity-0"></i>
+    </div>
+</div>

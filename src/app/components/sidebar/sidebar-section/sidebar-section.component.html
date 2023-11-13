@@ -1,0 +1,26 @@
+<div
+(click)="is_open = !is_open"
+class="flex justify-between px-4 py-2 align-middle hover:cursor-pointer bg-section-grey"
+>
+    <div class="flex-col justify-center">
+      <h1
+      class="font-roboto text-base font-medium"
+      >{{section.title}}</h1>
+      <h1 class="font-roboto text-sm text-hint-grey font-light">{{subtitle}}</h1>
+    </div>
+    
+    <div class="flex justify-between pl-4 py-2 align-middle hover:cursor-pointer">
+      <i 
+      class="bi bi-chevron-up hover:cursor-pointer transition-transform duration-300 h-7"
+      [ngClass]="{
+          'rotate-180': !is_open,
+          'rotate-0': is_open
+      }"
+      style="font-size: 25px"></i>
+    </div>
+      
+    
+  </div>
+  <div *ngIf="is_open">
+  <sidebar-subsection *ngFor="let subsection of section.items" [subsection]="subsection"/>
+  </div>

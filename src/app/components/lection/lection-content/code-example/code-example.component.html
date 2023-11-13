@@ -1,0 +1,9 @@
+<div class="border-4 border-section-grey bg-code-bg flex flex-col group mb-8">
+    <div class="self-end mt-2 flex">
+        <h1 class="mr-2 font-roboto text-hint-grey text-sm opacity-0 group-hover:opacity-100 transition-opacity hover:cursor-pointer"
+        ngxClipboard [cbContent]="code_example.code">Скопировать код</h1>
+        <h1 class="mr-4 font-roboto text-hint-grey uppercase text-sm">{{code_example.language}}</h1>
+    </div>
+    <h4 class="ml-4 mb-6 font-courier">{{code_example.code}}</h4>
+    <h4>{{code_example.output}}</h4>
+</div>

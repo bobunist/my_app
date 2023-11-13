@@ -1,0 +1,19 @@
+
+
+<div class="border-4 border-section-grey bg-code-bg flex flex-col group mb-8 relative">
+    
+    <div class="self-end mt-2 flex mr-2 relative">
+        <i class="bi bi-play-fill  mr-2 font-roboto text-red-500 text-2xl opacity-0 group-hover:opacity-100 hover:cursor-pointer" (click)="execute=true"></i>
+        <i class="bi bi-arrow-clockwise mr-3 font-roboto text-hint-grey text-xl opacity-0 group-hover:opacity-100 hover:cursor-pointer" (click)="restartCode()"></i>
+        <i class="bi bi-copy mr-2 font-roboto text-hint-grey text-xl opacity-0 group-hover:opacity-100 hover:cursor-pointer"
+        ngxClipboard [cbContent]="data.start_code"
+        ></i>
+        <h1 class="mr-4 font-roboto text-hint-grey uppercase text-sm group-hover:hidden transition-transform">{{data.language}}</h1>
+    </div>
+    <textarea class="bg-code-bg ml-4 mr-24 mb-4 font-courier border-0 focus:outline-none resize-none relative" (input)="adjustTextareaHeight()" [(ngModel)]="code"></textarea>
+    <div *ngIf="execute" class="border-4 border-section-grey bg-section-grey flex flex-col group">
+        <h4 class="ml-4 my-4 font-courier ">{{output}}</h4>
+    </div>
+</div>
+
+

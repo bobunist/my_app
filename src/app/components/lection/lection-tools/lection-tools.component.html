@@ -1,0 +1,9 @@
+<div class="flex flex-col">
+    <div class="flex justify-around border-y mb-8">
+        <h1 [ngClass]="{
+            'border-b-2 border-black': item === active_section
+        }" *ngFor="let item of sections" class="px-4 hover:cursor-pointer py-2 " (click)="active_section=item">{{item}}</h1>
+    </div>
+    <lection-tools-overview *ngIf="active_section === 'Обзор'"></lection-tools-overview>
+    <lection-tools-notes *ngIf="active_section === 'Заметки'"></lection-tools-notes>
+</div>
