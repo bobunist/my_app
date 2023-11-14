@@ -13,7 +13,6 @@ export class PomodoroService {
   startTimer(duration: number): void {
     const intervalInMilliseconds: number = 45 * 60 * 1000;
     const futureTime: number = Date.now() + intervalInMilliseconds;
-    console.log(new Date(), new Date(futureTime));
 
     this.seconds = duration;
     this.timer = setInterval(() => {
@@ -23,6 +22,7 @@ export class PomodoroService {
       } else {
         this.stopTimer();
       }
+      
     }, 1000);
   }
 

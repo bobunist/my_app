@@ -23,8 +23,8 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     if (this.data && this.data.length > 0) {
       this.data.forEach((section: ICourseSection) => {
-        if (section.items && section.items.length > 0) {
-          this.all_items = this.all_items.concat(section.items);
+        if (section.subsections && section.subsections.length > 0) {
+          this.all_items = this.all_items.concat(section.subsections);
         }
       });
     }

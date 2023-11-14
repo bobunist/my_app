@@ -22,5 +22,5 @@ class="flex justify-between px-4 py-2 align-middle hover:cursor-pointer bg-secti
     
   </div>
   <div *ngIf="is_open">
-  <sidebar-subsection *ngFor="let subsection of section.items" [subsection]="subsection"/>
+  <sidebar-subsection *ngFor="let subsection of section.subsections" [subsection]="subsection"/>
   </div>

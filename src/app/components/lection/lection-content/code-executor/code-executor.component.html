@@ -10,7 +10,7 @@
         ></i>
         <h1 class="mr-4 font-roboto text-hint-grey uppercase text-sm group-hover:hidden transition-transform">{{data.language}}</h1>
     </div>
-    <textarea class="bg-code-bg ml-4 mr-24 mb-4 font-courier border-0 focus:outline-none resize-none relative" (input)="adjustTextareaHeight()" [(ngModel)]="code"></textarea>
+    <textarea #codeTextarea class="bg-code-bg ml-4 mr-24 mb-4 font-courier border-0 focus:outline-none resize-none relative h-[100px]"  [(ngModel)]="code"></textarea>
     <div *ngIf="execute" class="border-4 border-section-grey bg-section-grey flex flex-col group">
         <h4 class="ml-4 my-4 font-courier ">{{output}}</h4>
     </div>

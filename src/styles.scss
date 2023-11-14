@@ -40,9 +40,24 @@
   font-weight: 400;
 }
 
+.markdown a {
+  color: #0075FF;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.markdown p :hover {
+  text-decoration: underline;
+}
+
 .markdown li::before{
   content: "-  ";
   margin-left: 5px;
+}
+
+.markdown code {
+  background: #EEEEEE;
+  padding: 1px 5px;
 }
 
 
@@ -95,5 +110,17 @@
 }
 
 
-// html, body { height: 100%; }
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.markdown_example a {
+  color: #0075FF;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.markdown_example a :hover {
+  text-decoration: underline;
+}
+
+.markdown_example code {
+  background: #EEEEEE;
+  padding: 1px 5px;
+}

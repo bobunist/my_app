@@ -4,5 +4,5 @@ export interface ICourseSection {
     id?: number
     title: string
     complete_time: string
-    items: ICourseSubsection[]
+    subsections: ICourseSubsection[]
 } 

@@ -39,8 +39,6 @@ export class PomodoroComponent implements OnInit {
 }
 
   getProgressBarBackground(): string {
-    console.log(this.progressPercentage);
-    
     return `radial-gradient(closest-side, white 79%, transparent 80% 100%), conic-gradient(hotpink ${this.progressPercentage}%, pink 0)`;
   }
 }

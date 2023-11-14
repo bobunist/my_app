@@ -30,6 +30,12 @@ import { NotificationsComponent } from './components/toolbar/notifications/notif
 import { PomodoroComponent } from './components/toolbar/pomodoro/pomodoro.component';
 import { ToolbarNotesComponent } from './components/toolbar/notes/notes.component';
 import { CoursePageComponent } from './pages/course-page/course-page.component';
+import { CourseContentHeaderComponent } from './components/lection/lection-content/course-content-header/course-content-header.component';
+import { FocusDirective } from './directives/focus.directive';
+import { NoteComponent } from './components/lection/lection-tools/notes/note/note.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { AdditionalDataComponent } from './components/lection/lection-tools/additional-data/additional-data.component';
+import { DiscussionComponent } from './components/lection/lection-tools/discussion/discussion.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +61,13 @@ import { CoursePageComponent } from './pages/course-page/course-page.component';
     NotificationsComponent,
     PomodoroComponent,
     ToolbarNotesComponent,
-    CoursePageComponent
+    CoursePageComponent,
+    CourseContentHeaderComponent,
+    FocusDirective,
+    NoteComponent,
+    FooterComponent,
+    AdditionalDataComponent,
+    DiscussionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CourseContentCodeExample, CourseContentCodeExecutor, CourseContentImage, CourseContentQuiz, CourseContentText, CourseContentTextExample, CourseContentVideo } from 'src/app/models/course-content';
+import { CourseContentCodeExample, CourseContentCodeExecutor, CourseContentHeader, CourseContentImage, CourseContentQuiz, CourseContentText, CourseContentTextExample, CourseContentVideo } from 'src/app/models/course-content';
 import { ICourseSubsection } from 'src/app/models/course-subsection';
 import { CourseService } from 'src/app/services/course.service';
 
@@ -20,11 +20,8 @@ export class LectionComponent implements OnInit {
   ngOnInit(): void {
     this.courseService.getActiveSubsection().subscribe(subsection =>
       this.active_subsection = subsection
-      
       )
-
   }
-
 
   isCourseContentText(item: any): item is CourseContentText {
     return item && item.hasOwnProperty('text');
@@ -52,6 +49,10 @@ export class LectionComponent implements OnInit {
 
   isCourseContentCodeExecutor(item: any): item is CourseContentCodeExecutor {
     return item && item.hasOwnProperty('start_code') && item.hasOwnProperty('language')
+  }
+
+  isCourseContentHeader(item: any): item is CourseContentHeader {
+    return item && item.hasOwnProperty('header')
   }
 
 }

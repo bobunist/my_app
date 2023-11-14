@@ -1,4 +1,4 @@
-import {CourseContentCodeAssertation, CourseContentCodeExample, CourseContentCodeExecutor, CourseContentImage, CourseContentQuiz, CourseContentText, CourseContentTextExample, CourseContentVideo} from './course-content'
+import {CourseContentCodeAssertation, CourseContentCodeExample, CourseContentCodeExecutor, CourseContentHeader, CourseContentImage, CourseContentQuiz, CourseContentText, CourseContentTextExample, CourseContentVideo} from './course-content'
 
 export interface ICourseSubsection {
     id: number
@@ -9,7 +9,8 @@ export interface ICourseSubsection {
         CourseContentText | CourseContentQuiz |
          CourseContentTextExample | CourseContentImage |
           CourseContentVideo | CourseContentCodeExample |
-           CourseContentCodeAssertation | CourseContentCodeExecutor
+           CourseContentCodeAssertation | CourseContentCodeExecutor |
+            CourseContentHeader
            )[]
     time: string
     url_link: string

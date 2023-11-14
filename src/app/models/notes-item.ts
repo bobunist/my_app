@@ -1,9 +1,11 @@
-import { CourseContent } from "./course-content"
+import { CourseContentHeader } from "./course-content"
 
-export interface INotes {
+export interface INote {
     id?: number
     description: string
+    section_id: number
+    subsection_id: number
     item: ( 
-        CourseContent
+        CourseContentHeader
            )
 }

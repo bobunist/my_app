@@ -28,11 +28,11 @@ export class SidebarSectionComponent implements  AfterViewChecked{
   }
 
   generateSubtitle(data: ICourseSection): string {
-    const completedItems = data.items.filter(item => item.is_complete === true)
+    const completedItems = data.subsections.filter(subsection => subsection.is_complete === true)
 
     var newString = completedItems.length.toString() +
       ' / ' +
-      data.items.length.toString() +
+      data.subsections.length.toString() +
       ' | ' +
       data.complete_time
 

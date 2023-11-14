@@ -1,5 +1,10 @@
 export type CourseContent = {
+    id?: number
+}
+
+export type CourseContentHeader = CourseContent & {
     id: number
+    header: string
 }
 
 export type CourseContentText = CourseContent & {

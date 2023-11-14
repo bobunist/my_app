@@ -8,6 +8,7 @@
             <lection-video *ngIf="isCourseContentVideo(item)" [video]="item"></lection-video>
             <lection-quiz *ngIf="isCourseContentQuiz(item)" [quiz]="item"></lection-quiz>
             <lection-code-executor *ngIf="isCourseContentCodeExecutor(item)" [data]="item"></lection-code-executor>
+            <lection-header *ngIf="isCourseContentHeader(item)" [data]="item" [id]="'lection-header-' + item.id"></lection-header>
         </ng-container>
     </div>
 

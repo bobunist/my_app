@@ -20,15 +20,15 @@ export class CodeExecutorComponent implements OnInit {
 
   restartCode(){
     this.code = this.data.start_code
-    this.adjustTextareaHeight()
+    // this.adjustTextareaHeight()
   }
   
-  adjustTextareaHeight() {
-    const textarea = document.querySelector('textarea');
-    if (textarea) {
-      textarea.style.height = 'auto';
-      textarea.style.height = textarea.scrollHeight + 'px';
-    }
-  }
+  // adjustTextareaHeight() {
+  //   const textarea = document.querySelector('textarea');
+  //   if (textarea) {
+  //     textarea.style.height = 'auto';
+  //     textarea.style.height = 100 + 'px';
+  //   }
+  // }
 
 }

@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class LectionToolsComponent {
   sections = ['Обзор', 'Заметки', 'Обсуждения', 'Дополнительные материалы']
-  active_section = 'Заметки'
+  active_section = 'Обзор'
 }

@@ -1,36 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ToolbarItem } from 'src/app/models/toolbar-item';
+import { CourseService } from 'src/app/services/course.service';
 
 @Component({
   selector: 'toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
 })
-export class ToolbarComponent{
-  
-  items: item[] = [
-    {
-      icon: 'bi bi-stopwatch',
-      text_hint: 'Помодоро'
-    },
-    {
-      icon: 'bi bi-pencil-square',
-      text_hint: 'Заметки'
-    },
-    {
-      icon: 'bi bi-alarm',
-      text_hint: 'Напомнить'
-    }
-  ]
+export class ToolbarComponent implements OnInit {
 
-  is_open = true
-  active_item: item | undefined = this.items[1]
+  items: item[]
+  is_open: boolean
+  active_item: item | undefined
 
+  constructor(
+    private courseService: CourseService
+  ){}
 
-
-  changeToolbarState(){
-    this.is_open = !this.is_open
-    this.active_item = undefined
+  ngOnInit(): void {
+    this.items = this.courseService.getItems()
+    this.courseService.getIsToolbarOpen().subscribe(is_open => this.is_open = is_open)
+    this.courseService.getActiveToolbarItem().subscribe(active_item => this.active_item = active_item)
   }
+
+  swapIsOpen(){
+    this.courseService.setToolbarState(
+      !this.is_open,
+      undefined,
+      undefined
+    )
+  }
+
+
+  setactiveItem(item: ToolbarItem){
+    this.courseService.setToolbarState(
+      this.is_open,
+      item
+    )
+  }
+
 
 }
 
