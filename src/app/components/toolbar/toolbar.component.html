@@ -1,17 +1,18 @@
-<div
-  class="right-0 items-center mb-4 mr-4"
-  >
+<div class="right-0 items-center mb-4 mr-4 z-20 ">
 
-  <toolbar-notifications *ngIf="is_open && active_item == items[2]" (onChangeToolbarState)="swapIsOpen()"></toolbar-notifications>
-  <toolbar-pomodoro *ngIf="is_open && active_item == items[0]"></toolbar-pomodoro>
-  <toolbar-notes *ngIf="is_open && active_item == items[1]"></toolbar-notes>
+  <toolbar-settings *ngIf="is_open && active_item == items[0]"></toolbar-settings>
+  <toolbar-pomodoro *ngIf="is_open && active_item == items[1]"></toolbar-pomodoro>
+  <toolbar-notes *ngIf="is_open && active_item == items[2]"></toolbar-notes>
+  <toolbar-notifications *ngIf="is_open && active_item == items[3]"
+    (onChangeToolbarState)="swapIsOpen()"></toolbar-notifications>
 
-  <div class="flex flex-col bg-white rounded-full w-fit border" [ngClass]="{'pt-10 ': is_open && !active_item}">
-    <div *ngIf="is_open && !active_item" class="flex flex-col items-center ">
+  <div class="flex flex-col bg-white rounded-full w-fit border z-20" [ngClass]="{'pt-10 ': is_open && !active_item}">
+    <div *ngIf="is_open && !active_item" class="flex flex-col items-center z-20">
       <div *ngFor="let item of items" class="flex flex-col items-center group hover:cursor-pointer text-3xl"
         (click)="setactiveItem(item)">
         <i class="{{item.icon}}"></i>
-        <p class="text-sm pb-4 text-hint-grey opacity-0 group-hover:opacity-100 transition-opacity">{{item.text_hint}}</p>
+        <p class="text-sm pb-4 text-hint-grey opacity-0 group-hover:opacity-100 transition-opacity">{{item.text_hint}}
+        </p>
       </div>
     </div>
     <div
@@ -20,5 +21,5 @@
       <i class="bi bi-sliders text-4xl"></i>
     </div>
   </div>
-  
+
 </div>

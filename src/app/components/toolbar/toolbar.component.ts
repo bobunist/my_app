@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToolbarItem } from 'src/app/models/toolbar-item';
-import { CourseService } from 'src/app/services/course.service';
+import { AbstractCourseService } from 'src/app/services/course/i-course-service';
 
 @Component({
   selector: 'toolbar',
@@ -14,13 +14,14 @@ export class ToolbarComponent implements OnInit {
   active_item: item | undefined
 
   constructor(
-    private courseService: CourseService
+    private courseService: AbstractCourseService
   ){}
 
   ngOnInit(): void {
     this.items = this.courseService.getItems()
-    this.courseService.getIsToolbarOpen().subscribe(is_open => this.is_open = is_open)
-    this.courseService.getActiveToolbarItem().subscribe(active_item => this.active_item = active_item)
+    this.courseService.isToolbarOpen$.subscribe(is_open => this.is_open = is_open)
+    
+    this.courseService.activeToolbarItem$.subscribe(active_item => this.active_item = active_item)
   }
 
   swapIsOpen(){

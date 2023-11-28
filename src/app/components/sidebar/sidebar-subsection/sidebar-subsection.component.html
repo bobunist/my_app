@@ -3,7 +3,7 @@ class="flex flex-row justify-start px-4 py-2 hover:cursor-pointer"
 [ngClass]="{
     'bg-secondary-grey': active_subsection == subsection
 }"
-(click)="courseService.setActiveSubsection(subsection)"
+(click)="courseService.setActiveSubsection(subsection.id)"
 >
         <button 
         (click)="markSubsection($event ,subsection.id)"

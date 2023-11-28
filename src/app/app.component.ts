@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ICourseSection } from './models/course-section';
-import { CourseService } from './services/course.service';
+import { AbstractCourseService } from './services/course/i-course-service';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +13,11 @@ export class AppComponent implements OnInit{
   sidebar_data: ICourseSection[] = []
   
   constructor(
-    public courseService: CourseService,
+    public courseService: AbstractCourseService,
   ){}
 
   ngOnInit(): void {
-    this.courseService.getCourseTable().subscribe(data =>
+    this.courseService.course$.subscribe(data =>
       this.sidebar_data = data
       
       )

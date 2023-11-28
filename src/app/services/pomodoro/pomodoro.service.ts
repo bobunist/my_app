@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { AbstractPomodoroService } from './i-pomodoro-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PomodoroService {
+export class PomodoroService implements AbstractPomodoroService {
   private timer: any;
   private seconds: number = 0;
   private timerSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.seconds);

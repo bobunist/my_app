@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseToolsOverview } from 'src/app/models/course-overview';
 import { IUser } from 'src/app/models/user';
-import { CourseService } from 'src/app/services/course.service';
-import { UserService } from 'src/app/services/user.service';
+import { AbstractCourseService } from 'src/app/services/course/i-course-service';
+import { AbstractUserService } from 'src/app/services/user/i-user-service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'lection-tools-overview',
@@ -15,8 +16,8 @@ export class OverviewComponent implements OnInit {
   author: IUser
 
   constructor(
-    private courseService: CourseService,
-    private userService: UserService
+    private courseService: AbstractCourseService,
+    private userService: AbstractUserService
   ) { }
 
   ngOnInit(): void {

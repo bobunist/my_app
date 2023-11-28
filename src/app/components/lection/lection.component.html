@@ -1,7 +1,7 @@
 <div class="flex flex-col mt-10 mb-4">
     <div class="" *ngFor="let item of active_subsection.content; let i = index ">
         <ng-container *ngIf="item">
-            <lection-text *ngIf="isCourseContentText(item)" [text]="item.text"></lection-text>
+            <lection-text *ngIf="isCourseContentText(item)" [data]="item"></lection-text>
             <lection-image *ngIf="isCourseContentImage(item)" [image]="item"/>
             <lection-code-example *ngIf="isCourseContentCodeExample(item)" [code_example]="item"></lection-code-example>
             <lection-text-example *ngIf="isCourseContentTextExample(item)" [data]="item"></lection-text-example>
@@ -11,5 +11,8 @@
             <lection-header *ngIf="isCourseContentHeader(item)" [data]="item" [id]="'lection-header-' + item.id"></lection-header>
         </ng-container>
     </div>
+        <button *ngIf="!is_last" class="bg-black text-white px-4 py-2 text-xl font-medium rounded" (click)="nextSubsection()">перейти к следующей лекции</button>
+        <button *ngIf="is_last && !active_subsection.is_complete" class="bg-black text-white px-4 py-2 text-xl font-medium rounded" 
+        (click)="courseService.markSubsection(active_subsection.id)">завершить раздел</button>
 
 </div>

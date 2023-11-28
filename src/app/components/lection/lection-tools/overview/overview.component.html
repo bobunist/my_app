@@ -1,7 +1,7 @@
 <div class="flex flex-col">
     <div class="flex border-b" *ngFor="let section of overview.sections">
         <h1 class="font-light w-1/4">{{section.section_name}}</h1>
-        <lection-text class="w-3/4" [text]="section.section_content"></lection-text>
+        <markdown class="w-3/4" [data]="section.section_content"></markdown>
     </div>
     <div class="flex pt-8">
         <h1 class="font-light w-1/4">Преподаватель</h1>
@@ -14,7 +14,7 @@
                 <i class="bi bi-github text-4xl mr-2 hover:cursor-pointer" (click)="openNewWindow(author.telegram)"></i>
                 <i class="bi bi-youtube text-4xl hover:cursor-pointer" (click)="openNewWindow(author.telegram)"></i>
             </div>
-            <lection-text [text]="overview.author_data.description"></lection-text>
+            <markdown [data]="overview.author_data.description"></markdown>
         </div>
     </div>
 </div>

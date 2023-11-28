@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PomodoroService } from 'src/app/services/pomodoro.service';
+import { AbstractPomodoroService } from 'src/app/services/pomodoro/i-pomodoro-service';
 
 @Component({
   selector: 'toolbar-pomodoro',
@@ -11,7 +11,7 @@ export class PomodoroComponent implements OnInit {
   remainingOutputTime: string;
   progressPercentage: number;
   interval = 60 * 45 // seconds
-  constructor(private pomodoroService: PomodoroService) {}
+  constructor(private pomodoroService: AbstractPomodoroService) {}
 
   ngOnInit(): void {
     this.pomodoroService.getRemainingTime().subscribe(

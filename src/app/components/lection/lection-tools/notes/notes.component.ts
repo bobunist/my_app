@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { INote } from 'src/app/models/notes-item';
-import { CourseService } from 'src/app/services/course.service';
+import { INote } from 'src/app/models/note';
+import { AbstractCourseService } from 'src/app/services/course/i-course-service';
 
 @Component({
   selector: 'lection-tools-notes',
@@ -14,7 +14,7 @@ export class NotesComponent implements OnInit{
   notes: INote[]
 
   constructor(
-    private course_service: CourseService
+    private course_service: AbstractCourseService
   ){}
   ngOnInit(): void {
     this.course_service.notes$.subscribe(data => this.notes = data)

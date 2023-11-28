@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseContentCodeExample, CourseContentCodeExecutor, CourseContentHeader, CourseContentImage, CourseContentQuiz, CourseContentText, CourseContentTextExample, CourseContentVideo } from 'src/app/models/course-content';
+import { ICourseSection } from 'src/app/models/course-section';
 import { ICourseSubsection } from 'src/app/models/course-subsection';
-import { CourseService } from 'src/app/services/course.service';
+import { AbstractCourseService } from 'src/app/services/course/i-course-service';
 
 @Component({
   selector: 'lection',
@@ -11,16 +12,29 @@ import { CourseService } from 'src/app/services/course.service';
 export class LectionComponent implements OnInit {
 
   active_subsection: ICourseSubsection
-  active_subsection1: CourseContentText
-  
+  active_section: ICourseSection
+  is_last: boolean
+  next_subsection_id: number | undefined
+  course: ICourseSection[]
+
   constructor(
-    public courseService: CourseService,
+    public courseService: AbstractCourseService,
   ) { }
-  
+
   ngOnInit(): void {
-    this.courseService.getActiveSubsection().subscribe(subsection =>
+    this.courseService.active_section$.subscribe(section => this.active_section = section)
+    this.courseService.active_subsection$.subscribe(subsection => {
       this.active_subsection = subsection
-      )
+      if (this.active_section.subsections[this.active_section.subsections.length - 1] == this.active_subsection) {
+        this.is_last = true
+      }
+      else this.is_last = false
+    }
+    )
+  }
+
+  nextSubsection() {
+    this.courseService.nextSubsection()
   }
 
   isCourseContentText(item: any): item is CourseContentText {
@@ -34,7 +48,7 @@ export class LectionComponent implements OnInit {
   isCourseContentCodeExample(item: any): item is CourseContentCodeExample {
     return item && item.hasOwnProperty('code') && item.hasOwnProperty('language')
   }
-  
+
   isCourseContentTextExample(item: any): item is CourseContentTextExample {
     return item && item.hasOwnProperty('example')
   }

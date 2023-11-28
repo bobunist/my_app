@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit} from '@angular/core';
 import { ICourseSection } from 'src/app/models/course-section';
 import { ICourseSubsection } from 'src/app/models/course-subsection';
-import { CourseService } from 'src/app/services/course.service';
+import { AbstractCourseService } from 'src/app/services/course/i-course-service';
 
 @Component({
   selector: 'sidebar',
@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
   all_items: any[] = [];
 
   constructor(
-    public courseService: CourseService,
+    public courseService: AbstractCourseService,
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit {
         }
       });
     }
-    this.courseService.getActiveSubsection().subscribe(subsection =>
+    this.courseService.active_subsection$.subscribe(subsection =>
       this.active_subsection = subsection
       )
   }
@@ -40,6 +40,6 @@ export class SidebarComponent implements OnInit {
 
   setActiveSubsection(subsection: ICourseSubsection){
     this.term = ''
-    this.courseService.setActiveSubsection(subsection)
+    this.courseService.setActiveSubsection(subsection.id)
   }
 }

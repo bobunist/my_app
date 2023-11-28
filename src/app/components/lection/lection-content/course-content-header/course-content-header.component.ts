@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CourseContentHeader } from 'src/app/models/course-content';
-import { CourseService } from 'src/app/services/course.service';
+import { AbstractCourseService } from 'src/app/services/course/i-course-service';
 
 @Component({
   selector: 'lection-header',
@@ -11,12 +11,11 @@ export class CourseContentHeaderComponent {
   @Input() data: CourseContentHeader
 
   constructor( 
-    public courseService: CourseService
+    public courseService: AbstractCourseService
      ){}
 
 
   addNote(id: number) {
-    this.courseService.startEditingNote(id)
   }
 
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, enableProdMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,7 +36,13 @@ import { NoteComponent } from './components/lection/lection-tools/notes/note/not
 import { FooterComponent } from './components/footer/footer.component';
 import { AdditionalDataComponent } from './components/lection/lection-tools/additional-data/additional-data.component';
 import { DiscussionComponent } from './components/lection/lection-tools/discussion/discussion.component';
-
+import { AbstractCourseService } from './services/course/i-course-service';
+import { CourseService } from './services/course/course.service';
+import { AbstractPomodoroService } from './services/pomodoro/i-pomodoro-service';
+import { PomodoroService } from './services/pomodoro/pomodoro.service';
+import { AbstractUserService } from './services/user/i-user-service';
+import { UserService } from './services/user/user.service';
+import { SettingsComponent } from './components/toolbar/settings/settings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +73,8 @@ import { DiscussionComponent } from './components/lection/lection-tools/discussi
     NoteComponent,
     FooterComponent,
     AdditionalDataComponent,
-    DiscussionComponent
+    DiscussionComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +86,11 @@ import { DiscussionComponent } from './components/lection/lection-tools/discussi
     YouTubePlayerModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: AbstractCourseService, useClass: CourseService },
+    { provide: AbstractPomodoroService, useClass: PomodoroService },
+    { provide: AbstractUserService , useClass: UserService },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

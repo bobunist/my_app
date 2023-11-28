@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { users } from '../data/users';
-import { IUser } from '../models/user';
+import { users } from '../../data/users';
+import { IUser } from '../../models/user';
+import { AbstractUserService } from './i-user-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService implements AbstractUserService {
 
   getUser(id: number): IUser 
   {

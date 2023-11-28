@@ -1,6 +1,7 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
 import { ICourseSection } from 'src/app/models/course-section';
 import { SidebarSubsectionIComponent } from '../sidebar-subsection/sidebar-subsection.component';
+import { SelectedItem } from 'src/app/models/selected-item';
 
 @Component({
   selector: 'sidebar-section',
@@ -14,11 +15,17 @@ export class SidebarSectionComponent implements  AfterViewChecked{
   @ViewChild(SidebarSubsectionIComponent) subsection_child!: SidebarSubsectionIComponent
 
   subtitle = ''
-  is_open = false
+  is_open = true
 
   constructor(
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) { }
+
+
+  item1: SelectedItem = {
+    id: 1,
+    text: 'selectedText'
+  }
 
 
   ngAfterViewChecked(): void {
