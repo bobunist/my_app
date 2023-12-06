@@ -43,6 +43,7 @@ import { PomodoroService } from './services/pomodoro/pomodoro.service';
 import { AbstractUserService } from './services/user/i-user-service';
 import { UserService } from './services/user/user.service';
 import { SettingsComponent } from './components/toolbar/settings/settings.component';
+import { NoteInTextComponent } from './components/lection/lection-content/note-in-text/note-in-text.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +75,8 @@ import { SettingsComponent } from './components/toolbar/settings/settings.compon
     FooterComponent,
     AdditionalDataComponent,
     DiscussionComponent,
-    SettingsComponent
+    SettingsComponent,
+    NoteInTextComponent
   ],
   imports: [
     BrowserModule,

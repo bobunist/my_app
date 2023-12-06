@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, never } from 'rxjs'
 import { ICourseSection } from '../../models/course-section'
 import { ICourseSubsection } from '../../models/course-subsection'
 import { overview } from '../../data/overview'
@@ -11,6 +11,7 @@ import { course1 } from '../../data/course1'
 import { AbstractCourseService } from './i-course-service'
 import { SelectedItem } from 'src/app/models/selected-item'
 import { CourseContentText } from 'src/app/models/course-content'
+import { LectionToolsSection } from 'src/app/models/lection-tools'
 
 @Injectable({
   providedIn: 'root'
@@ -42,10 +43,17 @@ export class CourseService extends AbstractCourseService {
   private selected_item = new BehaviorSubject<SelectedItem | undefined>(undefined)
   selected_item$ = this.selected_item.asObservable()
 
+  
+  private lection_tools_active_section = new BehaviorSubject<LectionToolsSection>(LectionToolsSection.Overview)
+  lection_tools_active_section$ = this.lection_tools_active_section.asObservable()
+
+  setLectionToolsActiveSection(section: LectionToolsSection){
+    this.lection_tools_active_section.next(section)
+  }
+
   setSelectedItemForNote(item: SelectedItem): void {
     this.selected_item.next(item)
     this.setToolbarState(true, this.toolbar_items[2])
-    console.log(item);
   }
 
   getItems(): ToolbarItem[] {
@@ -84,9 +92,6 @@ export class CourseService extends AbstractCourseService {
 
   addNote(note: INote): void {
     const currentNotes = this.notes.getValue();
-    const updatedNotes = [...currentNotes, note];
-    this.notes.next(updatedNotes);
-
     let course: ICourseSection[] = this.course.getValue().map(
       section => {
         section.subsections.map(
@@ -94,20 +99,31 @@ export class CourseService extends AbstractCourseService {
             subsection.content.map(
               content_item => {
                 if (content_item.id === note.item_id && this._isCourseContentText(content_item)) {
-                  let start_index = content_item.text.indexOf(note.selected_text)
-                  let selected_text_len = note.selected_text.length
 
-                  let first_slice = content_item.text.slice(0, start_index)
-                  let last_slice = content_item.text.slice(start_index + selected_text_len, content_item.text.length)
+                  const regex = /<span\s+id="([^"]+)"/;
+                  const match_span = content_item.text.match(regex);
+                  let spanId = match_span ? match_span[1] : null
 
-                  let new_text =
+                  let match_id = spanId?.match(/marked(\d+)/)
 
-                    first_slice +
-                    // '<span style="background-color: yellow;">[' + note.selected_text + `]` + `("${note.description}")` + `</span>`
-                    `<span title="${note.description}" style="background-color: yellow; cursor: help;">` + note.selected_text + `</span>`
-                    + last_slice
+                  let extractedId = match_id ? match_id[0] : null
 
-                  content_item.text = new_text
+                  let just_id = extractedId ? parseInt(extractedId.slice(6)) : null
+
+                  let updatedNotes = [...currentNotes];
+
+                  updatedNotes = updatedNotes.filter(note => note.item_id != just_id)
+
+                  updatedNotes = [...updatedNotes, note]
+
+                  this.notes.next(updatedNotes);
+
+                  content_item.text = content_item.text.replace(/<span.*?>|<\/span>/g, '');
+
+                  let newString = this.replaceSubString(content_item, note)
+
+                  content_item.text = newString;
+
 
                 }
                 return content_item
@@ -124,7 +140,62 @@ export class CourseService extends AbstractCourseService {
 
   }
 
+  replaceSubString(content_item: CourseContentText, note: INote): string {
+    let result = '';
+    let substringCopy = note.selected_text + '';
+    let last = -1;
+    let startIndex = -1;
+    let endIndex = -1;
 
+    for (let i = 0; i < content_item.text.length; i++) {
+      if (substringCopy.length === 0) {
+        last = i;
+        break;
+      }
+
+      if (content_item.text[i] === '`' || content_item.text[i] === '*') {
+        if (startIndex === -1) {
+          startIndex = i;
+        }
+        endIndex = i
+        result += content_item.text[i];
+      } else if (content_item.text[i] === substringCopy[0]) {
+        if (startIndex === -1) {
+          startIndex = i;
+        }
+        endIndex = i
+        result += content_item.text[i];
+        substringCopy = substringCopy.slice(1);
+      } else {
+        endIndex = -1
+        startIndex = -1;
+        substringCopy = note.selected_text + '';
+        result = '';
+      }
+    }
+
+    if (last <= content_item.text.length - 1) {
+      if (content_item.text[last] === '`') {
+        result += content_item.text[last];
+        endIndex = last + 1;
+      }
+
+      if (content_item.text[last] === '*') {
+        result += content_item.text[last];
+        endIndex = last;
+
+        if (last <= content_item.text.length - 2) {
+          if (content_item.text[last + 1] === '*') {
+            endIndex = last + 1;
+            result += content_item.text[last + 1];
+          }
+        }
+      }
+    }
+    const newString = content_item.text.substring(0, startIndex) +
+      `<span id="marked${content_item.id}" title="${note.description}" subsection_id="${note.subsection_id}" style="background-color: yellow; cursor: help;">${content_item.text.slice(startIndex, endIndex + 1)}</span>` + content_item.text.slice(endIndex + 1, content_item.text.length);
+    return newString;
+  }
   // findSectionAndSubsection(sectionId: number, subsectionId: number): { section: ICourseSection | null, subsection: ICourseSubsection | null } {
   //   let result: { section: ICourseSection | null, subsection: ICourseSubsection | null } = { section: null, subsection: null }
 
@@ -179,7 +250,7 @@ export class CourseService extends AbstractCourseService {
       window.scrollTo(0, 0);
     }
     if (!prev!.is_complete) this.markSubsection(prev!.id)
-    
+
   }
 
 }

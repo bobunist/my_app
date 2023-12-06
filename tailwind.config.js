@@ -18,10 +18,11 @@ module.exports = {
         'code-bg': '#EEEEEE',
         'section-grey': '#F7F9FA'
       },
-    fontFamily: {
-      roboto: ['Roboto', 'sans-serif'],
-      courier: ['Courier Prime', 'monospace'],
-    }},
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],
+        courier: ['Courier Prime', 'monospace'],
+      }
+    },
   },
   plugins: [],
 }

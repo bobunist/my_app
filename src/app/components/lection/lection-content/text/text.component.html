@@ -1,3 +1,5 @@
 <div (mouseup)="handleSelection($event)">
-  <markdown id="text{{data.id}}" ngPreserveWhitespaces [disableSanitizer]="true" [data]="data.text" class="markdown font-roboto"></markdown>
+  <markdown id="text{{data.id}}" ngPreserveWhitespaces [disableSanitizer]="true" [data]="data.text" class="markdown font-roboto"
+    (click)="handleMarkdownClick($event)">
+  </markdown>
 </div>

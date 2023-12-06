@@ -1,11 +1,12 @@
 <div class="flex flex-col">
     <div class="flex justify-around border-y mb-8">
-        <h1 [ngClass]="{
-            'border-b-2 border-black': item === active_section
-        }" *ngFor="let item of sections" class="px-4 hover:cursor-pointer py-2 " (click)="active_section=item">{{item}}</h1>
+      <h1 [ngClass]="{
+        'border-b-2 border-black': item === active_section
+      }" *ngFor="let item of getEnumValues(LectionToolsSection)" class="px-4 hover:cursor-pointer py-2 " (click)="setActiveSection(item)">{{item}}</h1>
     </div>
-    <lection-tools-overview *ngIf="active_section === 'Обзор'"></lection-tools-overview>
-    <lection-tools-notes *ngIf="active_section === 'Заметки'"></lection-tools-notes>
-    <lection-tools-additional-data  *ngIf="active_section === 'Дополнительные материалы'"></lection-tools-additional-data>
-    <lection-tools-discussion *ngIf="active_section === 'Обсуждения'"></lection-tools-discussion>
-</div>
+    <lection-tools-overview *ngIf="active_section === LectionToolsSection.Overview"></lection-tools-overview>
+    <lection-tools-notes *ngIf="active_section === LectionToolsSection.Notes"></lection-tools-notes>
+    <lection-tools-additional-data *ngIf="active_section === LectionToolsSection.AdditionalMaterials"></lection-tools-additional-data>
+    <lection-tools-discussion *ngIf="active_section === LectionToolsSection.Discussions"></lection-tools-discussion>
+  </div>
+  
